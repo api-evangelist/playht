@@ -1,0 +1,177 @@
+aid: playht
+name: PlayHT
+description: >-
+  PlayHT, now operating as PlayAI, is a generative voice platform offering
+  realistic text-to-speech models, AI voice agents, and a podcast generation
+  tool called PlayNote. The platform centers on the PlayDialog and Play 3.0
+  Mini models, providing more than 200 prebuilt voices across multiple
+  languages and accents with sub-second latency suited to conversational
+  applications. PlayAI exposes REST and streaming endpoints for text-to-speech,
+  voice listing, voice cloning, and voice agent management. It ships Python
+  and Node.js SDKs and a hosted playground, and integrates with the major
+  voice agent infrastructure stacks. The product is widely used to build
+  voice assistants, IVRs, narration pipelines, and content production
+  workflows.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Voice
+  - TTS
+  - Text to Speech
+  - Voice Cloning
+  - Voice Agents
+  - Streaming
+  - PlayDialog
+  - Play 3.0
+  - PlayNote
+  - Multilingual
+  - Real-Time
+url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: playht:tts-api
+    name: PlayAI Text-to-Speech API
+    description: >-
+      The PlayAI Text-to-Speech API converts text into natural, human-like
+      speech using the PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini
+      models. It supports streaming, voice cloning, and a large catalog of
+      prebuilt voices across many languages and accents.
+    humanURL: https://docs.play.ai
+    baseURL: https://api.play.ai
+    tags:
+      - TTS
+      - Streaming
+      - Voice Cloning
+      - Voices
+      - Multilingual
+    properties:
+      - type: Documentation
+        url: https://docs.play.ai
+      - type: GettingStarted
+        url: https://docs.play.ai/tts-api
+      - type: SignUp
+        url: https://play.ai/signup
+      - type: APIReference
+        url: https://docs.play.ai
+      - type: SDK
+        url: https://github.com/playht/pyht
+      - type: SDK
+        url: https://github.com/playht/playht-nodejs-sdk
+      - type: GitHubRepository
+        url: https://github.com/playht
+      - type: Pricing
+        url: https://play.ai/pricing
+      - type: Authentication
+        url: https://docs.play.ai
+    features:
+      - name: Multiple TTS Models
+        description: Choose between PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini for quality vs speed tradeoffs.
+      - name: 200+ Prebuilt Voices
+        description: Library of more than 200 prebuilt voices across many languages and accents.
+      - name: Streaming Output
+        description: Real-time streaming audio for sub-second time to first byte.
+      - name: Voice Cloning
+        description: Clone a voice from reference audio for personalized synthesis.
+      - name: Speech Parameters
+        description: Adjust speed, pitch, and volume to fit the use case.
+      - name: Multiple Audio Formats
+        description: Output to common audio formats and bitrates for downstream pipelines.
+    useCases:
+      - name: Voice Agents
+        description: Power conversational voice agents with low-latency synthesis.
+      - name: IVR and Phone Bots
+        description: Replace recorded prompts and IVR menus with generative speech.
+      - name: Content Production
+        description: Generate narration for video, audiobooks, and explainers.
+      - name: Accessibility
+        description: Add high-quality read-aloud features to applications.
+      - name: Localization
+        description: Localize voiceovers across languages and accents.
+    integrations:
+      - name: Twilio
+      - name: LiveKit
+      - name: Pipecat
+      - name: Vapi
+      - name: Daily
+      - name: LangChain
+      - name: OpenAI
+      - name: Anthropic
+      - name: Vercel AI SDK
+    authentication:
+      - type: API Key
+        description: API key authentication with a user ID and secret API key in request headers.
+  - aid: playht:agents-api
+    name: PlayAI Voice Agents API
+    description: >-
+      The PlayAI Voice Agents API lets developers create, configure, and run
+      conversational AI agents that process voice input and respond with
+      generated speech, with optional tool use and external integrations.
+    humanURL: https://docs.play.ai
+    baseURL: https://api.play.ai
+    tags:
+      - Voice Agents
+      - Conversational AI
+      - Tools
+      - Streaming
+    properties:
+      - type: Documentation
+        url: https://docs.play.ai
+      - type: APIReference
+        url: https://docs.play.ai
+      - type: SDK
+        url: https://github.com/playht
+      - type: Pricing
+        url: https://play.ai/pricing
+    features:
+      - name: Agent Configuration
+        description: Define agent persona, voice, knowledge, and behavior via API.
+      - name: Voice Input Handling
+        description: Receive and process real-time voice input from users.
+      - name: Tool Use
+        description: Integrate agents with external tools and APIs for actions.
+      - name: Knowledge Grounding
+        description: Ground agents in custom knowledge sources for accurate replies.
+    useCases:
+      - name: Customer Support Voice Bots
+        description: Build voice support agents that resolve common requests.
+      - name: Outbound Calling
+        description: Run outbound voice agents for reminders, surveys, and follow-ups.
+      - name: Voice Concierge
+        description: Create concierge experiences inside apps and devices.
+    integrations:
+      - name: Twilio
+      - name: LiveKit
+      - name: Pipecat
+      - name: Daily
+      - name: Zapier
+    authentication:
+      - type: API Key
+        description: API key authentication with a user ID and secret API key in request headers.
+common:
+  - type: Website
+    url: https://play.ht
+  - type: Documentation
+    url: https://docs.play.ai
+  - type: Blog
+    url: https://play.ht/blog
+  - type: GitHubOrganization
+    url: https://github.com/playht
+  - type: Pricing
+    url: https://play.ht/pricing
+  - type: TermsOfService
+    url: https://play.ht/terms
+  - type: PrivacyPolicy
+    url: https://play.ht/privacy
+  - type: Discord
+    url: https://discord.gg/VuP4nXVA9M
+  - type: X
+    url: https://x.com/play_ht
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/playht
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
