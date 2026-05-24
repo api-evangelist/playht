@@ -172,6 +172,8 @@ common:
     url: https://x.com/play_ht
   - type: LinkedIn
     url: https://www.linkedin.com/company/playht
+  - type: LLMsTxt
+    url: https://docs.play.ai/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
