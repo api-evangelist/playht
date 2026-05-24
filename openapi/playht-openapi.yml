@@ -1,0 +1,374 @@
+openapi: 3.1.0
+info:
+  title: PlayAI API
+  description: |
+    PlayAI (formerly PlayHT) is a generative voice platform. The REST API
+    covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
+    Play 3.0 Mini models), voice catalog, voice agents, external functions,
+    and PlayNote document-to-audio jobs.
+
+    Authentication uses two headers: `AUTHORIZATION` carries the secret API
+    key, and `X-USER-ID` carries the PlayAI user identifier.
+  version: "1.0.0"
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+servers:
+  - url: https://api.play.ai
+    description: PlayAI production API
+security:
+  - apiKey: []
+    userId: []
+tags:
+  - name: TTS
+    description: Text-to-speech generation, streaming, and async jobs.
+  - name: Voices
+    description: Prebuilt voice catalog.
+  - name: Agents
+    description: Voice agent management.
+  - name: Conversations
+    description: Agent conversation retrieval.
+  - name: External Functions
+    description: Tool definitions for voice agents.
+  - name: PlayNote
+    description: Document-to-audio PlayNote jobs.
+paths:
+  /api/v1/tts:
+    post:
+      tags: [TTS]
+      summary: Create an async TTS job
+      description: |
+        Convert text to speech with PlayAI models. Returns an async job that
+        can be polled via GET /api/v1/tts/{asyncTtsJobId}.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TTSRequest'
+      responses:
+        '202':
+          description: Async TTS job created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TTSJob'
+  /api/v1/tts/{asyncTtsJobId}:
+    parameters:
+      - $ref: '#/components/parameters/AsyncTtsJobId'
+    get:
+      tags: [TTS]
+      summary: Retrieve async TTS job status
+      responses:
+        '200':
+          description: TTS job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TTSJob'
+  /api/v1/tts/stream:
+    post:
+      tags: [TTS]
+      summary: Stream speech in real time
+      description: Streams audio bytes for the supplied text in real time.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TTSStreamRequest'
+      responses:
+        '200':
+          description: Streamed audio bytes.
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+  /api/v1/voices:
+    get:
+      tags: [Voices]
+      summary: List prebuilt voices
+      responses:
+        '200':
+          description: Voice catalog.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Voice'
+  /api/v1/agents:
+    post:
+      tags: [Agents]
+      summary: Create a PlayAI agent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+      responses:
+        '201':
+          description: Agent created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+  /api/v1/agents/{agentId}:
+    parameters:
+      - $ref: '#/components/parameters/AgentId'
+    get:
+      tags: [Agents]
+      summary: Retrieve agent information
+      responses:
+        '200':
+          description: Agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+    patch:
+      tags: [Agents]
+      summary: Update agent properties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+      responses:
+        '200':
+          description: Updated agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+  /api/v1/agents/{agentId}/conversations:
+    parameters:
+      - $ref: '#/components/parameters/AgentId'
+    get:
+      tags: [Conversations]
+      summary: List agent conversations
+      responses:
+        '200':
+          description: Conversations.
+  /api/v1/agents/{agentId}/conversations/{conversationId}/transcript:
+    parameters:
+      - $ref: '#/components/parameters/AgentId'
+      - $ref: '#/components/parameters/ConversationId'
+    get:
+      tags: [Conversations]
+      summary: Get conversation transcript
+      responses:
+        '200':
+          description: Transcript.
+  /api/v1/external-functions:
+    get:
+      tags: [External Functions]
+      summary: List external functions
+      responses:
+        '200':
+          description: External function collection.
+    post:
+      tags: [External Functions]
+      summary: Create an external function
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalFunction'
+      responses:
+        '201':
+          description: External function created.
+  /api/v1/playnotes:
+    post:
+      tags: [PlayNote]
+      summary: Create a PlayNote
+      description: Create a new PlayNote by providing a source file URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayNoteRequest'
+      responses:
+        '202':
+          description: PlayNote job accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayNote'
+  /api/v1/playnotes/{playNoteId}:
+    parameters:
+      - $ref: '#/components/parameters/PlayNoteId'
+    get:
+      tags: [PlayNote]
+      summary: Retrieve PlayNote information
+      responses:
+        '200':
+          description: PlayNote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayNote'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: Secret API key issued in the PlayAI console.
+    userId:
+      type: apiKey
+      in: header
+      name: X-USER-ID
+      description: PlayAI user identifier paired with the API key.
+  parameters:
+    AsyncTtsJobId:
+      name: asyncTtsJobId
+      in: path
+      required: true
+      schema:
+        type: string
+    AgentId:
+      name: agentId
+      in: path
+      required: true
+      schema:
+        type: string
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+    PlayNoteId:
+      name: playNoteId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    TTSRequest:
+      type: object
+      required: [text, voice]
+      properties:
+        text:
+          type: string
+        voice:
+          type: string
+        model:
+          type: string
+          enum: [PlayDialog, Dialog-1.0-Turbo, Play3.0-mini]
+        outputFormat:
+          type: string
+          enum: [mp3, wav, ogg, flac, mulaw]
+        speed:
+          type: number
+    TTSStreamRequest:
+      allOf:
+        - $ref: '#/components/schemas/TTSRequest'
+    TTSJob:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [queued, processing, complete, failed]
+        outputUrl:
+          type: string
+          format: uri
+        durationSeconds:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+    Voice:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        language:
+          type: string
+        accent:
+          type: string
+        gender:
+          type: string
+        sample:
+          type: string
+          format: uri
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+        description:
+          type: string
+        voice:
+          type: string
+        prompt:
+          type: string
+        criticalKnowledge:
+          type: string
+        greeting:
+          type: string
+        externalFunctions:
+          type: array
+          items:
+            type: string
+    ExternalFunction:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+          format: uri
+        method:
+          type: string
+        parameters:
+          type: object
+          additionalProperties: true
+    PlayNoteRequest:
+      type: object
+      required: [sourceFileUrl]
+      properties:
+        sourceFileUrl:
+          type: string
+          format: uri
+        synthesisStyle:
+          type: string
+        voice1:
+          type: string
+        voice2:
+          type: string
+    PlayNote:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        audioUrl:
+          type: string
+          format: uri
+        createdAt:
+          type: string
+          format: date-time
