@@ -30,7 +30,7 @@ tags:
   - Real-Time
 url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/apis.yml
 created: '2026-05-23'
-modified: '2026-05-23'
+modified: '2026-05-29'
 specificationVersion: '0.20'
 apis:
   - aid: playht:tts-api
@@ -67,6 +67,8 @@ apis:
         url: https://play.ai/pricing
       - type: Authentication
         url: https://docs.play.ai
+      - type: AsyncAPI
+        url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml
     features:
       - name: Multiple TTS Models
         description: Choose between PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini for quality vs speed tradeoffs.
@@ -126,6 +128,8 @@ apis:
         url: https://github.com/playht
       - type: Pricing
         url: https://play.ai/pricing
+      - type: AsyncAPI
+        url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml
     features:
       - name: Agent Configuration
         description: Define agent persona, voice, knowledge, and behavior via API.

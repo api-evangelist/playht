@@ -1,0 +1,428 @@
+asyncapi: '2.6.0'
+info:
+  title: PlayAI Realtime WebSocket APIs
+  version: '1.0.0'
+  description: >-
+    AsyncAPI 2.6 description of the PlayAI (formerly PlayHT) realtime WebSocket
+    APIs. Covers the Text-to-Speech (TTS) streaming WebSocket used to synthesize
+    audio from text in real time, and the Voice Agents WebSocket used to
+    operate audio-in / audio-out conversational agents.
+
+    The TTS WebSocket URL is obtained dynamically from the HTTPS endpoint
+    POST https://api.play.ai/api/v1/tts/websocket-auth using the
+    Authorization (Bearer) and X-User-Id headers. The response contains a
+    `webSocketUrls` map keyed by model (Play3.0-mini, PlayDialog,
+    PlayDialogArabic, PlayDialogHindi, PlayDialogLora, PlayDialogMultilingual)
+    along with an `expiresAt` timestamp. The returned URLs currently point to
+    fal-hosted WebSocket gateways (e.g. wss://ws.fal.run/playht-fal/...).
+
+    Voice Agents are reached directly at wss://api.play.ai/v1/talk/{agentId}
+    and are authenticated by a `setup` message containing the API key.
+
+    Sources:
+      - https://docs.play.ai/api-reference/text-to-speech/websocket.md
+      - https://docs.play.ai/api-reference/agents/websocket.md
+  contact:
+    name: PlayAI Developer Support
+    url: https://docs.play.ai
+  license:
+    name: PlayAI Terms of Service
+    url: https://play.ht/terms
+
+defaultContentType: application/json
+
+servers:
+  tts:
+    url: ws.fal.run/playht-fal
+    protocol: wss
+    description: >-
+      Dynamically issued PlayAI TTS WebSocket gateway. The exact URL (including
+      the `fal_jwt_token` query parameter and the model-specific path such as
+      `/playht-tts/stream` for Play3.0-mini or `/playht-tts-ldm/stream` for
+      PlayDialog) is returned by POST
+      https://api.play.ai/api/v1/tts/websocket-auth. Connections last for up to
+      1 hour before re-authentication is required.
+  agents:
+    url: api.play.ai
+    protocol: wss
+    description: >-
+      PlayAI Voice Agents WebSocket gateway. Connect to
+      wss://api.play.ai/v1/talk/{agentId} and authenticate by sending a
+      `setup` message that includes your API key.
+
+channels:
+  /playht-tts/stream:
+    description: >-
+      TTS streaming channel for the Play3.0-mini model. Clients send JSON TTS
+      command frames and receive JSON `start` / `end` control frames
+      interleaved with binary audio chunks. The `fal_jwt_token` query
+      parameter is obtained from the websocket-auth endpoint. The
+      `/playht-tts-ldm/stream` path is used for the PlayDialog model, and
+      similar per-model paths are returned for the other PlayDialog variants.
+    servers:
+      - tts
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+        query:
+          type: object
+          required:
+            - fal_jwt_token
+          properties:
+            fal_jwt_token:
+              type: string
+              description: Short-lived session token from /api/v1/tts/websocket-auth.
+    publish:
+      operationId: sendTtsCommand
+      summary: Send a TTS synthesis command.
+      description: >-
+        Send a JSON TTS command. If a sequence of commands is sent on the same
+        connection, audio output is returned in the same order as the
+        requests.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TtsCommand'
+    subscribe:
+      operationId: receiveTtsStream
+      summary: Receive TTS synthesis events and audio.
+      description: >-
+        Receive a `start` JSON frame, one or more binary audio chunks, and
+        then an `end` JSON frame for each TTS command. Binary frames carry
+        audio data in the configured `output_format`.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TtsStart'
+          - $ref: '#/components/messages/TtsAudioChunk'
+          - $ref: '#/components/messages/TtsEnd'
+
+  /v1/talk/{agentId}:
+    description: >-
+      Voice Agents audio-in / audio-out WebSocket. The connection is
+      established with the target agent identifier; the first client message
+      must be a `setup` frame carrying the API key and the desired audio
+      configuration. Server sends `audioStream` chunks, voice activity
+      events, `newAudioStream` markers, and `error` messages.
+    servers:
+      - agents
+    parameters:
+      agentId:
+        description: PlayAI agent identifier.
+        schema:
+          type: string
+    publish:
+      operationId: sendAgentClientMessage
+      summary: Send a client message to the voice agent.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AgentSetup'
+          - $ref: '#/components/messages/AgentAudioIn'
+    subscribe:
+      operationId: receiveAgentServerMessage
+      summary: Receive messages from the voice agent.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AgentAudioStream'
+          - $ref: '#/components/messages/AgentNewAudioStream'
+          - $ref: '#/components/messages/AgentVoiceActivityStart'
+          - $ref: '#/components/messages/AgentVoiceActivityEnd'
+          - $ref: '#/components/messages/AgentError'
+
+components:
+  messages:
+    TtsCommand:
+      name: TtsCommand
+      title: TTS Command
+      summary: Synthesize text on the streaming TTS connection.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TtsCommandPayload'
+
+    TtsStart:
+      name: TtsStart
+      title: TTS Start
+      summary: Marks the start of a TTS response stream for a given request_id.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TtsStartPayload'
+
+    TtsEnd:
+      name: TtsEnd
+      title: TTS End
+      summary: Marks the end of a TTS response stream for a given request_id.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TtsEndPayload'
+
+    TtsAudioChunk:
+      name: TtsAudioChunk
+      title: TTS Audio Chunk
+      summary: >-
+        Binary audio frame delivered between the `start` and `end` JSON
+        frames. The payload bytes match the configured `output_format`
+        (for example MP3 for `audio/mpeg`).
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+        description: Raw binary audio data for one chunk of the TTS response.
+
+    AgentSetup:
+      name: AgentSetup
+      title: Agent Setup
+      summary: >-
+        First client message on a Voice Agents connection. Carries the API
+        key and the desired audio in/out configuration.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentSetupPayload'
+
+    AgentAudioIn:
+      name: AgentAudioIn
+      title: Agent Audio Input
+      summary: Streams base64-encoded user audio into the agent.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentAudioInPayload'
+
+    AgentAudioStream:
+      name: AgentAudioStream
+      title: Agent Audio Stream
+      summary: Base64-encoded chunk of the agent's spoken response.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentAudioStreamPayload'
+
+    AgentNewAudioStream:
+      name: AgentNewAudioStream
+      title: Agent New Audio Stream
+      summary: >-
+        Indicates the start of a new agent response stream. Clients should
+        clear their playback buffer and start playing the new stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentNewAudioStreamPayload'
+
+    AgentVoiceActivityStart:
+      name: AgentVoiceActivityStart
+      title: Voice Activity Start
+      summary: Server detected the user started speaking.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentVoiceActivityStartPayload'
+
+    AgentVoiceActivityEnd:
+      name: AgentVoiceActivityEnd
+      title: Voice Activity End
+      summary: Server detected the user stopped speaking.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentVoiceActivityEndPayload'
+
+    AgentError:
+      name: AgentError
+      title: Agent Error
+      summary: Error message emitted by the Voice Agents server.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentErrorPayload'
+
+  schemas:
+    TtsCommandPayload:
+      type: object
+      required:
+        - text
+        - voice
+      properties:
+        text:
+          type: string
+          description: Text to synthesize.
+        voice:
+          type: string
+          description: >-
+            Voice identifier (PlayAI voice URL or ID) to use for synthesis.
+        request_id:
+          type: string
+          description: >-
+            Optional client-supplied request identifier. Echoed back on the
+            corresponding `start` and `end` frames.
+        output_format:
+          type: string
+          description: >-
+            Desired audio output format for the streamed binary chunks
+            (matches the TTS streaming API formats, for example `mp3`).
+        temperature:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          description: Sampling temperature.
+        speed:
+          type: number
+          minimum: 0.5
+          maximum: 2.0
+          description: Playback speed multiplier.
+
+    TtsStartPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: start
+          description: Discriminator value.
+        request_id:
+          type: string
+          description: >-
+            Identifier of the TTS command this stream corresponds to.
+
+    TtsEndPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: end
+          description: Discriminator value.
+        request_id:
+          type: string
+          description: >-
+            Identifier of the TTS command whose stream has ended.
+
+    AgentSetupPayload:
+      type: object
+      required:
+        - type
+        - apiKey
+      properties:
+        type:
+          type: string
+          const: setup
+        apiKey:
+          type: string
+          description: PlayAI API key.
+        inputEncoding:
+          type: string
+          description: Format of the audio the client will send.
+          enum:
+            - media-container
+            - mulaw
+            - linear16
+            - flac
+            - amr-nb
+            - amr-wb
+            - opus
+            - speex
+            - g729
+          default: media-container
+        inputSampleRate:
+          type: integer
+          description: >-
+            Sample rate of incoming audio. Required for headerless formats.
+        outputFormat:
+          type: string
+          description: Format the server should use for `audioStream` chunks.
+          enum:
+            - mp3
+            - raw
+            - wav
+            - ogg
+            - flac
+            - mulaw
+          default: mp3
+        outputSampleRate:
+          type: integer
+          description: Sample rate for outgoing audio.
+          default: 44100
+        customGreeting:
+          type: string
+          description: Overrides the agent's default greeting.
+        prompt:
+          type: string
+          description: Additional behavioral instructions for the agent.
+        continueConversation:
+          type: string
+          description: >-
+            Conversation ID of a prior session to resume.
+
+    AgentAudioInPayload:
+      type: object
+      required:
+        - type
+        - data
+      properties:
+        type:
+          type: string
+          const: audioIn
+        data:
+          type: string
+          format: byte
+          description: >-
+            Base64-encoded audio chunk matching the configured
+            `inputEncoding` and `inputSampleRate`.
+
+    AgentAudioStreamPayload:
+      type: object
+      required:
+        - type
+        - data
+      properties:
+        type:
+          type: string
+          const: audioStream
+        data:
+          type: string
+          format: byte
+          description: >-
+            Base64-encoded audio chunk matching the configured
+            `outputFormat` and `outputSampleRate`.
+
+    AgentNewAudioStreamPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: newAudioStream
+
+    AgentVoiceActivityStartPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: voiceActivityStart
+
+    AgentVoiceActivityEndPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: voiceActivityEnd
+
+    AgentErrorPayload:
+      type: object
+      required:
+        - type
+        - code
+        - message
+      properties:
+        type:
+          type: string
+          const: error
+        code:
+          type: integer
+          description: >-
+            Numeric error code. Documented codes include 1001 (invalid
+            authorization token), 1002 (invalid agent ID), 1003 (invalid
+            authorization credentials), 1005 (insufficient credits), 4400
+            (invalid parameters / message format), 4401 (unauthorized
+            access), 4429 (maximum concurrent connections exceeded), and
+            4500 (internal server error).
+        message:
+          type: string
+          description: Human-readable error description.
