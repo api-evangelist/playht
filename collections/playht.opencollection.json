@@ -1,0 +1,280 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PlayAI API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TTS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an async TTS job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/tts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert text to speech with PlayAI models. Returns an async job that\ncan be polled via GET /api/v1/tts/{asyncTtsJobId}.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve async TTS job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/tts/:asyncTtsJobId",
+            "params": [
+              {
+                "name": "asyncTtsJobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve async TTS job status"
+        },
+        {
+          "info": {
+            "name": "Stream speech in real time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/tts/stream",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streams audio bytes for the supplied text in real time."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Voices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List prebuilt voices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/voices"
+          },
+          "docs": "List prebuilt voices"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a PlayAI agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a PlayAI agent"
+        },
+        {
+          "info": {
+            "name": "Retrieve agent information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve agent information"
+        },
+        {
+          "info": {
+            "name": "Update agent properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.play.ai/api/v1/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update agent properties"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agent conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/agents/:agentId/conversations",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List agent conversations"
+        },
+        {
+          "info": {
+            "name": "Get conversation transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/agents/:agentId/conversations/:conversationId/transcript",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get conversation transcript"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "External Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List external functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/external-functions"
+          },
+          "docs": "List external functions"
+        },
+        {
+          "info": {
+            "name": "Create an external function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/external-functions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an external function"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PlayNote",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a PlayNote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/playnotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new PlayNote by providing a source file URL."
+        },
+        {
+          "info": {
+            "name": "Retrieve PlayNote information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/playnotes/:playNoteId",
+            "params": [
+              {
+                "name": "playNoteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve PlayNote information"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
