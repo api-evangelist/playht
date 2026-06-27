@@ -53,13 +53,13 @@ apis:
         url: https://docs.play.ai
       - type: GettingStarted
         url: https://docs.play.ai/tts-api
-      - type: SignUp
+      - type: Signup
         url: https://play.ai/signup
       - type: APIReference
         url: https://docs.play.ai
-      - type: SDK
+      - type: SDKs
         url: https://github.com/playht/pyht
-      - type: SDK
+      - type: SDKs
         url: https://github.com/playht/playht-nodejs-sdk
       - type: GitHubRepository
         url: https://github.com/playht
@@ -124,7 +124,7 @@ apis:
         url: https://docs.play.ai
       - type: APIReference
         url: https://docs.play.ai
-      - type: SDK
+      - type: SDKs
         url: https://github.com/playht
       - type: Pricing
         url: https://play.ai/pricing
@@ -176,7 +176,7 @@ common:
     url: https://x.com/play_ht
   - type: LinkedIn
     url: https://www.linkedin.com/company/playht
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.play.ai/llms.txt
 maintainers:
   - FN: Kin Lane

@@ -3,13 +3,10 @@
   "feeds": [
     {
       "source": "https://play.ht/blog",
-      "error": "URLError"
-    },
-    {
-      "source": "https://docs.play.ai",
-      "error": "HTTPError"
+      "saved": 0,
+      "error": "DNS ENOTFOUND play.ht"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:01:58Z",
+  "post_count": 0
 }
