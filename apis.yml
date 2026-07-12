@@ -156,6 +156,10 @@ apis:
       - type: API Key
         description: API key authentication with a user ID and secret API key in request headers.
 common:
+  - type: DomainSecurity
+    url: security/playht-domain-security.yml
+  - type: Authentication
+    url: authentication/playht-authentication.yml
   - type: Website
     url: https://play.ht
   - type: Documentation

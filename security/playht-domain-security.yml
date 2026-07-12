@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: play.ht
+  https: false
+- host: docs.play.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jul 27 09:44:06 2026 GMT
+  hsts: null
+- host: api.play.ai
+  https: false
+domains:
+- domain: play.ht
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: play.ai
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: false

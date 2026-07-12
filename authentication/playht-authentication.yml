@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/playht-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: AUTHORIZATION
+  description: Secret API key issued in the PlayAI console.
+  sources:
+  - openapi/playht-openapi.yml
+- name: userId
+  type: apiKey
+  in: header
+  parameter: X-USER-ID
+  description: PlayAI user identifier paired with the API key.
+  sources:
+  - openapi/playht-openapi.yml
