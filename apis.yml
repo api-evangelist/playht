@@ -156,6 +156,8 @@ apis:
       - type: API Key
         description: API key authentication with a user ID and secret API key in request headers.
 common:
+  - type: AgenticAccess
+    url: agentic-access/playht-agentic-access.yml
   - type: DomainSecurity
     url: security/playht-domain-security.yml
   - type: Authentication
