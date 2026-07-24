@@ -1,0 +1,163 @@
+openapi: 3.1.0
+info:
+  title: PlayAI Agents TTS API
+  description: 'PlayAI (formerly PlayHT) is a generative voice platform. The REST API
+
+    covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
+
+    Play 3.0 Mini models), voice catalog, voice agents, external functions,
+
+    and PlayNote document-to-audio jobs.
+
+
+    Authentication uses two headers: `AUTHORIZATION` carries the secret API
+
+    key, and `X-USER-ID` carries the PlayAI user identifier.
+
+    '
+  version: 1.0.0
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+servers:
+- url: https://api.play.ai
+  description: PlayAI production API
+security:
+- apiKey: []
+  userId: []
+tags:
+- name: TTS
+  description: Text-to-speech generation, streaming, and async jobs.
+paths:
+  /api/v1/tts:
+    post:
+      tags:
+      - TTS
+      summary: Create an async TTS job
+      description: 'Convert text to speech with PlayAI models. Returns an async job that
+
+        can be polled via GET /api/v1/tts/{asyncTtsJobId}.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TTSRequest'
+      responses:
+        '202':
+          description: Async TTS job created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TTSJob'
+  /api/v1/tts/{asyncTtsJobId}:
+    parameters:
+    - $ref: '#/components/parameters/AsyncTtsJobId'
+    get:
+      tags:
+      - TTS
+      summary: Retrieve async TTS job status
+      responses:
+        '200':
+          description: TTS job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TTSJob'
+  /api/v1/tts/stream:
+    post:
+      tags:
+      - TTS
+      summary: Stream speech in real time
+      description: Streams audio bytes for the supplied text in real time.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TTSStreamRequest'
+      responses:
+        '200':
+          description: Streamed audio bytes.
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    TTSRequest:
+      type: object
+      required:
+      - text
+      - voice
+      properties:
+        text:
+          type: string
+        voice:
+          type: string
+        model:
+          type: string
+          enum:
+          - PlayDialog
+          - Dialog-1.0-Turbo
+          - Play3.0-mini
+        outputFormat:
+          type: string
+          enum:
+          - mp3
+          - wav
+          - ogg
+          - flac
+          - mulaw
+        speed:
+          type: number
+    TTSJob:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - processing
+          - complete
+          - failed
+        outputUrl:
+          type: string
+          format: uri
+        durationSeconds:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+    TTSStreamRequest:
+      allOf:
+      - $ref: '#/components/schemas/TTSRequest'
+  parameters:
+    AsyncTtsJobId:
+      name: asyncTtsJobId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: Secret API key issued in the PlayAI console.
+    userId:
+      type: apiKey
+      in: header
+      name: X-USER-ID
+      description: PlayAI user identifier paired with the API key.

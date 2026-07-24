@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: PlayAI Agents PlayNote API
+  description: 'PlayAI (formerly PlayHT) is a generative voice platform. The REST API
+
+    covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
+
+    Play 3.0 Mini models), voice catalog, voice agents, external functions,
+
+    and PlayNote document-to-audio jobs.
+
+
+    Authentication uses two headers: `AUTHORIZATION` carries the secret API
+
+    key, and `X-USER-ID` carries the PlayAI user identifier.
+
+    '
+  version: 1.0.0
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+servers:
+- url: https://api.play.ai
+  description: PlayAI production API
+security:
+- apiKey: []
+  userId: []
+tags:
+- name: PlayNote
+  description: Document-to-audio PlayNote jobs.
+paths:
+  /api/v1/playnotes:
+    post:
+      tags:
+      - PlayNote
+      summary: Create a PlayNote
+      description: Create a new PlayNote by providing a source file URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayNoteRequest'
+      responses:
+        '202':
+          description: PlayNote job accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayNote'
+  /api/v1/playnotes/{playNoteId}:
+    parameters:
+    - $ref: '#/components/parameters/PlayNoteId'
+    get:
+      tags:
+      - PlayNote
+      summary: Retrieve PlayNote information
+      responses:
+        '200':
+          description: PlayNote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayNote'
+components:
+  schemas:
+    PlayNoteRequest:
+      type: object
+      required:
+      - sourceFileUrl
+      properties:
+        sourceFileUrl:
+          type: string
+          format: uri
+        synthesisStyle:
+          type: string
+        voice1:
+          type: string
+        voice2:
+          type: string
+    PlayNote:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        audioUrl:
+          type: string
+          format: uri
+        createdAt:
+          type: string
+          format: date-time
+  parameters:
+    PlayNoteId:
+      name: playNoteId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: Secret API key issued in the PlayAI console.
+    userId:
+      type: apiKey
+      in: header
+      name: X-USER-ID
+      description: PlayAI user identifier paired with the API key.

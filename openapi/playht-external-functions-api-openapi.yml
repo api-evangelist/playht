@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: PlayAI Agents External Functions API
+  description: 'PlayAI (formerly PlayHT) is a generative voice platform. The REST API
+
+    covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
+
+    Play 3.0 Mini models), voice catalog, voice agents, external functions,
+
+    and PlayNote document-to-audio jobs.
+
+
+    Authentication uses two headers: `AUTHORIZATION` carries the secret API
+
+    key, and `X-USER-ID` carries the PlayAI user identifier.
+
+    '
+  version: 1.0.0
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+servers:
+- url: https://api.play.ai
+  description: PlayAI production API
+security:
+- apiKey: []
+  userId: []
+tags:
+- name: External Functions
+  description: Tool definitions for voice agents.
+paths:
+  /api/v1/external-functions:
+    get:
+      tags:
+      - External Functions
+      summary: List external functions
+      responses:
+        '200':
+          description: External function collection.
+    post:
+      tags:
+      - External Functions
+      summary: Create an external function
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalFunction'
+      responses:
+        '201':
+          description: External function created.
+components:
+  schemas:
+    ExternalFunction:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+          format: uri
+        method:
+          type: string
+        parameters:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: Secret API key issued in the PlayAI console.
+    userId:
+      type: apiKey
+      in: header
+      name: X-USER-ID
+      description: PlayAI user identifier paired with the API key.

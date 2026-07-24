@@ -1,0 +1,79 @@
+openapi: 3.1.0
+info:
+  title: PlayAI Agents Conversations API
+  description: 'PlayAI (formerly PlayHT) is a generative voice platform. The REST API
+
+    covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
+
+    Play 3.0 Mini models), voice catalog, voice agents, external functions,
+
+    and PlayNote document-to-audio jobs.
+
+
+    Authentication uses two headers: `AUTHORIZATION` carries the secret API
+
+    key, and `X-USER-ID` carries the PlayAI user identifier.
+
+    '
+  version: 1.0.0
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+servers:
+- url: https://api.play.ai
+  description: PlayAI production API
+security:
+- apiKey: []
+  userId: []
+tags:
+- name: Conversations
+  description: Agent conversation retrieval.
+paths:
+  /api/v1/agents/{agentId}/conversations:
+    parameters:
+    - $ref: '#/components/parameters/AgentId'
+    get:
+      tags:
+      - Conversations
+      summary: List agent conversations
+      responses:
+        '200':
+          description: Conversations.
+  /api/v1/agents/{agentId}/conversations/{conversationId}/transcript:
+    parameters:
+    - $ref: '#/components/parameters/AgentId'
+    - $ref: '#/components/parameters/ConversationId'
+    get:
+      tags:
+      - Conversations
+      summary: Get conversation transcript
+      responses:
+        '200':
+          description: Transcript.
+components:
+  parameters:
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+    AgentId:
+      name: agentId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: Secret API key issued in the PlayAI console.
+    userId:
+      type: apiKey
+      in: header
+      name: X-USER-ID
+      description: PlayAI user identifier paired with the API key.
