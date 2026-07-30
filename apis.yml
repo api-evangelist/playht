@@ -13,9 +13,22 @@ description: >-
   voice assistants, IVRs, narration pipelines, and content production
   workflows.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/playht.png
 tags:
   - Voice
   - TTS
@@ -33,128 +46,189 @@ created: '2026-05-23'
 modified: '2026-05-29'
 specificationVersion: '0.20'
 apis:
-  - aid: playht:tts-api
-    name: PlayAI Text-to-Speech API
+- aid: playht:tts-api
+  name: PlayAI Text-to-Speech API
+  description: >-
+    The PlayAI Text-to-Speech API converts text into natural, human-like speech using the PlayDialog 1.0,
+    Dialog 1.0 Turbo, and Play 3.0 Mini models. It supports streaming, voice cloning, and a large catalog
+    of prebuilt voices across many languages and accents.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - TTS
+  - Streaming
+  - Voice Cloning
+  - Voices
+  - Multilingual
+  properties:
+  - type: Documentation
+    url: https://docs.play.ai
+  - type: GettingStarted
+    url: https://docs.play.ai/tts-api
+  - type: Signup
+    url: https://play.ai/signup
+  - type: APIReference
+    url: https://docs.play.ai
+  - type: SDKs
+    url: https://github.com/playht/pyht
+  - type: SDKs
+    url: https://github.com/playht/playht-nodejs-sdk
+  - type: GitHubRepository
+    url: https://github.com/playht
+  - type: Pricing
+    url: https://play.ai/pricing
+  - type: Authentication
+    url: https://docs.play.ai
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml
+  features:
+  - name: Multiple TTS Models
     description: >-
-      The PlayAI Text-to-Speech API converts text into natural, human-like
-      speech using the PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini
-      models. It supports streaming, voice cloning, and a large catalog of
-      prebuilt voices across many languages and accents.
-    humanURL: https://docs.play.ai
-    baseURL: https://api.play.ai
-    tags:
-      - TTS
-      - Streaming
-      - Voice Cloning
-      - Voices
-      - Multilingual
-    properties:
-      - type: Documentation
-        url: https://docs.play.ai
-      - type: GettingStarted
-        url: https://docs.play.ai/tts-api
-      - type: Signup
-        url: https://play.ai/signup
-      - type: APIReference
-        url: https://docs.play.ai
-      - type: SDKs
-        url: https://github.com/playht/pyht
-      - type: SDKs
-        url: https://github.com/playht/playht-nodejs-sdk
-      - type: GitHubRepository
-        url: https://github.com/playht
-      - type: Pricing
-        url: https://play.ai/pricing
-      - type: Authentication
-        url: https://docs.play.ai
-      - type: AsyncAPI
-        url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml
-    features:
-      - name: Multiple TTS Models
-        description: Choose between PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini for quality vs speed tradeoffs.
-      - name: 200+ Prebuilt Voices
-        description: Library of more than 200 prebuilt voices across many languages and accents.
-      - name: Streaming Output
-        description: Real-time streaming audio for sub-second time to first byte.
-      - name: Voice Cloning
-        description: Clone a voice from reference audio for personalized synthesis.
-      - name: Speech Parameters
-        description: Adjust speed, pitch, and volume to fit the use case.
-      - name: Multiple Audio Formats
-        description: Output to common audio formats and bitrates for downstream pipelines.
-    useCases:
-      - name: Voice Agents
-        description: Power conversational voice agents with low-latency synthesis.
-      - name: IVR and Phone Bots
-        description: Replace recorded prompts and IVR menus with generative speech.
-      - name: Content Production
-        description: Generate narration for video, audiobooks, and explainers.
-      - name: Accessibility
-        description: Add high-quality read-aloud features to applications.
-      - name: Localization
-        description: Localize voiceovers across languages and accents.
-    integrations:
-      - name: Twilio
-      - name: LiveKit
-      - name: Pipecat
-      - name: Vapi
-      - name: Daily
-      - name: LangChain
-      - name: OpenAI
-      - name: Anthropic
-      - name: Vercel AI SDK
-    authentication:
-      - type: API Key
-        description: API key authentication with a user ID and secret API key in request headers.
-  - aid: playht:agents-api
-    name: PlayAI Voice Agents API
-    description: >-
-      The PlayAI Voice Agents API lets developers create, configure, and run
-      conversational AI agents that process voice input and respond with
-      generated speech, with optional tool use and external integrations.
-    humanURL: https://docs.play.ai
-    baseURL: https://api.play.ai
-    tags:
-      - Voice Agents
-      - Conversational AI
-      - Tools
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://docs.play.ai
-      - type: APIReference
-        url: https://docs.play.ai
-      - type: SDKs
-        url: https://github.com/playht
-      - type: Pricing
-        url: https://play.ai/pricing
-      - type: AsyncAPI
-        url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml
-    features:
-      - name: Agent Configuration
-        description: Define agent persona, voice, knowledge, and behavior via API.
-      - name: Voice Input Handling
-        description: Receive and process real-time voice input from users.
-      - name: Tool Use
-        description: Integrate agents with external tools and APIs for actions.
-      - name: Knowledge Grounding
-        description: Ground agents in custom knowledge sources for accurate replies.
-    useCases:
-      - name: Customer Support Voice Bots
-        description: Build voice support agents that resolve common requests.
-      - name: Outbound Calling
-        description: Run outbound voice agents for reminders, surveys, and follow-ups.
-      - name: Voice Concierge
-        description: Create concierge experiences inside apps and devices.
-    integrations:
-      - name: Twilio
-      - name: LiveKit
-      - name: Pipecat
-      - name: Daily
-      - name: Zapier
-    authentication:
-      - type: API Key
-        description: API key authentication with a user ID and secret API key in request headers.
+      Choose between PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini for quality vs speed tradeoffs.
+  - name: 200+ Prebuilt Voices
+    description: Library of more than 200 prebuilt voices across many languages and accents.
+  - name: Streaming Output
+    description: Real-time streaming audio for sub-second time to first byte.
+  - name: Voice Cloning
+    description: Clone a voice from reference audio for personalized synthesis.
+  - name: Speech Parameters
+    description: Adjust speed, pitch, and volume to fit the use case.
+  - name: Multiple Audio Formats
+    description: Output to common audio formats and bitrates for downstream pipelines.
+  useCases:
+  - name: Voice Agents
+    description: Power conversational voice agents with low-latency synthesis.
+  - name: IVR and Phone Bots
+    description: Replace recorded prompts and IVR menus with generative speech.
+  - name: Content Production
+    description: Generate narration for video, audiobooks, and explainers.
+  - name: Accessibility
+    description: Add high-quality read-aloud features to applications.
+  - name: Localization
+    description: Localize voiceovers across languages and accents.
+  integrations:
+  - name: Twilio
+  - name: LiveKit
+  - name: Pipecat
+  - name: Vapi
+  - name: Daily
+  - name: LangChain
+  - name: OpenAI
+  - name: Anthropic
+  - name: Vercel AI SDK
+  authentication:
+  - type: API Key
+    description: API key authentication with a user ID and secret API key in request headers.
+- aid: playht:agents-api
+  name: PlayAI Voice Agents API
+  description: >-
+    The PlayAI Voice Agents API lets developers create, configure, and run conversational AI agents that
+    process voice input and respond with generated speech, with optional tool use and external integrations.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - Voice Agents
+  - Conversational AI
+  - Tools
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://docs.play.ai
+  - type: APIReference
+    url: https://docs.play.ai
+  - type: SDKs
+    url: https://github.com/playht
+  - type: Pricing
+    url: https://play.ai/pricing
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml
+  features:
+  - name: Agent Configuration
+    description: Define agent persona, voice, knowledge, and behavior via API.
+  - name: Voice Input Handling
+    description: Receive and process real-time voice input from users.
+  - name: Tool Use
+    description: Integrate agents with external tools and APIs for actions.
+  - name: Knowledge Grounding
+    description: Ground agents in custom knowledge sources for accurate replies.
+  useCases:
+  - name: Customer Support Voice Bots
+    description: Build voice support agents that resolve common requests.
+  - name: Outbound Calling
+    description: Run outbound voice agents for reminders, surveys, and follow-ups.
+  - name: Voice Concierge
+    description: Create concierge experiences inside apps and devices.
+  integrations:
+  - name: Twilio
+  - name: LiveKit
+  - name: Pipecat
+  - name: Daily
+  - name: Zapier
+  authentication:
+  - type: API Key
+    description: API key authentication with a user ID and secret API key in request headers.
+- aid: playht:playht-agents-api
+  name: PlayHT Agents API
+  description: Voice agent management.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/playht-agents-api-openapi.yml
+- aid: playht:playht-conversations-api
+  name: PlayHT Conversations API
+  description: Agent conversation retrieval.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/playht-conversations-api-openapi.yml
+- aid: playht:playht-external-functions-api
+  name: PlayHT External Functions API
+  description: Tool definitions for voice agents.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - External Functions
+  properties:
+  - type: OpenAPI
+    url: openapi/playht-external-functions-api-openapi.yml
+- aid: playht:playht-playnote-api
+  name: PlayHT PlayNote API
+  description: Document-to-audio PlayNote jobs.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - PlayNote
+  properties:
+  - type: OpenAPI
+    url: openapi/playht-playnote-api-openapi.yml
+- aid: playht:playht-tts-api
+  name: PlayHT TTS API
+  description: Text-to-speech generation, streaming, and async jobs.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - TTS
+  properties:
+  - type: OpenAPI
+    url: openapi/playht-tts-api-openapi.yml
+- aid: playht:playht-voices-api
+  name: PlayHT Voices API
+  description: Prebuilt voice catalog.
+  humanURL: https://docs.play.ai
+  baseURL: https://api.play.ai
+  tags:
+  - Voices
+  properties:
+  - type: OpenAPI
+    url: openapi/playht-voices-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/playht-agentic-access.yml
