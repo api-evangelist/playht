@@ -1,0 +1,24 @@
+{
+  "provider": "playht",
+  "sources": [
+    "playht-agents-api-openapi.yml",
+    "playht-conversations-api-openapi.yml",
+    "playht-external-functions-api-openapi.yml",
+    "playht-playnote-api-openapi.yml",
+    "playht-tts-api-openapi.yml",
+    "playht-voices-api-openapi.yml"
+  ],
+  "outputs": [
+    "playht-agents-api-openapi.yml",
+    "playht-conversations-api-openapi.yml",
+    "playht-external-functions-api-openapi.yml",
+    "playht-playnote-api-openapi.yml",
+    "playht-tts-api-openapi.yml",
+    "playht-voices-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
