@@ -1,0 +1,128 @@
+{
+  "item": [
+    {
+      "id": "9c9508c6-e6cf-442e-9542-80e4a17f180b",
+      "name": "Voices",
+      "description": {
+        "content": "Prebuilt voice catalog.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "261cd17c-dd52-4722-b60f-06e5366d8d1b",
+          "name": "List prebuilt voices",
+          "request": {
+            "name": "List prebuilt voices",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "voices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12042dcc-9ac4-49b5-999c-5e3317d99050",
+              "name": "Voice catalog.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "voices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"language\": \"string\",\n    \"accent\": \"string\",\n    \"gender\": \"string\",\n    \"sample\": \"https://ig.xmsySx1r0SzTsJuu8TRnrk.OWscQT6sb97VpggfprARtW4-aS,N9ruuv8ooQ0KtLbL9\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"language\": \"string\",\n    \"accent\": \"string\",\n    \"gender\": \"string\",\n    \"sample\": \"http://DbHqfSadOFwvgIDYo.ddmrTIJgYoWJmpRS9OfgTcFT6v\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.play.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AUTHORIZATION"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "25270bb7-0136-4781-b944-e600c9adfb66",
+    "name": "PlayAI Agents Voices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PlayAI (formerly PlayHT) is a generative voice platform. The REST API\ncovers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and\nPlay 3.0 Mini models), voice catalog, voice agents, external functions,\nand PlayNote document-to-audio jobs.\n\nAuthentication uses two headers: `AUTHORIZATION` carries the secret API\nkey, and `X-USER-ID` carries the PlayAI user identifier.\n\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PlayAI Agents External Functions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List external functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/external-functions"
+          },
+          "docs": "List external functions"
+        },
+        {
+          "info": {
+            "name": "Create an external function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/external-functions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an external function"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

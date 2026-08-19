@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PlayAI Agents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a PlayAI agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a PlayAI agent"
+        },
+        {
+          "info": {
+            "name": "Retrieve agent information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve agent information"
+        },
+        {
+          "info": {
+            "name": "Update agent properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.play.ai/api/v1/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update agent properties"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

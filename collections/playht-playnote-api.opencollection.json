@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PlayAI Agents PlayNote API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PlayNote",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a PlayNote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/playnotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new PlayNote by providing a source file URL."
+        },
+        {
+          "info": {
+            "name": "Retrieve PlayNote information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/playnotes/:playNoteId",
+            "params": [
+              {
+                "name": "playNoteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve PlayNote information"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

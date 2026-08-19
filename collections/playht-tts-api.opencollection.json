@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PlayAI Agents TTS API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TTS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an async TTS job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/tts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert text to speech with PlayAI models. Returns an async job that\ncan be polled via GET /api/v1/tts/{asyncTtsJobId}.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve async TTS job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.play.ai/api/v1/tts/:asyncTtsJobId",
+            "params": [
+              {
+                "name": "asyncTtsJobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve async TTS job status"
+        },
+        {
+          "info": {
+            "name": "Stream speech in real time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.play.ai/api/v1/tts/stream",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streams audio bytes for the supplied text in real time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

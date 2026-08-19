@@ -1,0 +1,354 @@
+{
+  "item": [
+    {
+      "id": "1a873511-7b9b-49be-8e9c-72609d79b49c",
+      "name": "TTS",
+      "description": {
+        "content": "Text-to-speech generation, streaming, and async jobs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94bad230-d9bf-4397-80ad-31b931b19b71",
+          "name": "Create an async TTS job",
+          "request": {
+            "name": "Create an async TTS job",
+            "description": {
+              "content": "Convert text to speech with PlayAI models. Returns an async job that\ncan be polled via GET /api/v1/tts/{asyncTtsJobId}.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "tts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"model\": \"<string>\",\n  \"outputFormat\": \"<string>\",\n  \"speed\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ac093773-5ec6-468f-ac00-b66c8b9ce50b",
+              "name": "Async TTS job created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "tts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"model\": \"<string>\",\n  \"outputFormat\": \"<string>\",\n  \"speed\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"queued\",\n  \"outputUrl\": \"https://OjxSzBqjOoNIr.hmclVPXftDriPpo4UZGtqS62ZDELTFzgzqpYqF1+\",\n  \"durationSeconds\": 8025.877827289378,\n  \"createdAt\": \"2017-08-12T06:28:34.608Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "850c9035-4bdf-4069-a7f5-57c880719902",
+          "name": "Retrieve async TTS job status",
+          "request": {
+            "name": "Retrieve async TTS job status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "tts",
+                ":asyncTtsJobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asyncTtsJobId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b77ca8cc-2891-4944-aea1-001759f6950d",
+              "name": "TTS job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "tts",
+                    ":asyncTtsJobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asyncTtsJobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"queued\",\n  \"outputUrl\": \"https://OjxSzBqjOoNIr.hmclVPXftDriPpo4UZGtqS62ZDELTFzgzqpYqF1+\",\n  \"durationSeconds\": 8025.877827289378,\n  \"createdAt\": \"2017-08-12T06:28:34.608Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cc21740-5710-4666-a084-b93b3fbeb1d6",
+          "name": "Stream speech in real time",
+          "request": {
+            "name": "Stream speech in real time",
+            "description": {
+              "content": "Streams audio bytes for the supplied text in real time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "tts",
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "audio/mpeg"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"model\": \"<string>\",\n  \"outputFormat\": \"<string>\",\n  \"speed\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a89bf3f-8136-48df-bed1-000b219ff705",
+              "name": "Streamed audio bytes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "tts",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "audio/mpeg"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"string\",\n  \"voice\": \"string\",\n  \"model\": \"Play3.0-mini\",\n  \"outputFormat\": \"ogg\",\n  \"speed\": 6932.798503202083\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "audio/mpeg"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.play.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AUTHORIZATION"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e717b7bb-6d83-4c44-b494-fc4b165aa25c",
+    "name": "PlayAI Agents TTS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PlayAI (formerly PlayHT) is a generative voice platform. The REST API\ncovers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and\nPlay 3.0 Mini models), voice catalog, voice agents, external functions,\nand PlayNote document-to-audio jobs.\n\nAuthentication uses two headers: `AUTHORIZATION` carries the secret API\nkey, and `X-USER-ID` carries the PlayAI user identifier.\n\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}
