@@ -32,6 +32,18 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/playht.png
 tags:
   - Voice
   - TTS
+  - Text-to-Speech
+  - Voice Cloning
+  - Voice Agents
+  - Streaming
+  - PlayDialog
+  - Play 3.0
+  - PlayNote
+  - Multilingual
+  - Real-Time
+tags_raw:
+  - Voice
+  - TTS
   - Text to Speech
   - Voice Cloning
   - Voice Agents
