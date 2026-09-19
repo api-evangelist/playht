@@ -83,6 +83,12 @@ apis:
   - TTS
   - Streaming
   - Voice Cloning
+  - Voice
+  - Multilingual
+  tags_raw:
+  - TTS
+  - Streaming
+  - Voice Cloning
   - Voices
   - Multilingual
   properties:
@@ -250,6 +256,8 @@ apis:
   humanURL: https://docs.play.ai
   baseURL: https://api.play.ai
   tags:
+  - Voice
+  tags_raw:
   - Voices
   properties:
   - type: OpenAPI
