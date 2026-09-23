@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PlayAI Agents Conversations API
+  title: PlayAI Conversations API
   description: 'PlayAI (formerly PlayHT) is a generative voice platform. The REST API
 
     covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
@@ -12,9 +12,7 @@ info:
 
     Authentication uses two headers: `AUTHORIZATION` carries the secret API
 
-    key, and `X-USER-ID` carries the PlayAI user identifier.
-
-    '
+    key, and `X-USER-ID` carries the PlayAI user identifier.'
   version: 1.0.0
   contact:
     name: API Evangelist
@@ -41,6 +39,8 @@ paths:
       responses:
         '200':
           description: Conversations.
+      operationId: getApiV1AgentsByAgentIdConversations
+      x-operation-id-source: derived
   /api/v1/agents/{agentId}/conversations/{conversationId}/transcript:
     parameters:
     - $ref: '#/components/parameters/AgentId'
@@ -52,16 +52,18 @@ paths:
       responses:
         '200':
           description: Transcript.
+      operationId: getApiV1AgentsByAgentIdConversationsByConversationIdTranscript
+      x-operation-id-source: derived
 components:
   parameters:
-    ConversationId:
-      name: conversationId
+    AgentId:
+      name: agentId
       in: path
       required: true
       schema:
         type: string
-    AgentId:
-      name: agentId
+    ConversationId:
+      name: conversationId
       in: path
       required: true
       schema:

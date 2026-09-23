@@ -1,12 +1,7 @@
 {
   "provider": "playht",
   "sources": [
-    "playht-agents-api-openapi.yml",
-    "playht-conversations-api-openapi.yml",
-    "playht-external-functions-api-openapi.yml",
-    "playht-playnote-api-openapi.yml",
-    "playht-tts-api-openapi.yml",
-    "playht-voices-api-openapi.yml"
+    "_original/playht-openapi.yml"
   ],
   "outputs": [
     "playht-agents-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "playht-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "playht-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "playht-conversations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "playht-external-functions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "playht-playnote-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "playht-tts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "playht-voices-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

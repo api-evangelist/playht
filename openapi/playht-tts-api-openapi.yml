@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PlayAI Agents TTS API
+  title: PlayAI TTS API
   description: 'PlayAI (formerly PlayHT) is a generative voice platform. The REST API
 
     covers text-to-speech generation (PlayDialog, Dialog 1.0 Turbo, and
@@ -12,9 +12,7 @@ info:
 
     Authentication uses two headers: `AUTHORIZATION` carries the secret API
 
-    key, and `X-USER-ID` carries the PlayAI user identifier.
-
-    '
+    key, and `X-USER-ID` carries the PlayAI user identifier.'
   version: 1.0.0
   contact:
     name: API Evangelist
@@ -38,9 +36,7 @@ paths:
       summary: Create an async TTS job
       description: 'Convert text to speech with PlayAI models. Returns an async job that
 
-        can be polled via GET /api/v1/tts/{asyncTtsJobId}.
-
-        '
+        can be polled via GET /api/v1/tts/{asyncTtsJobId}.'
       requestBody:
         required: true
         content:
@@ -54,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TTSJob'
+      operationId: postApiV1Tts
+      x-operation-id-source: derived
   /api/v1/tts/{asyncTtsJobId}:
     parameters:
     - $ref: '#/components/parameters/AsyncTtsJobId'
@@ -68,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TTSJob'
+      operationId: getApiV1TtsByAsyncTtsJobId
+      x-operation-id-source: derived
   /api/v1/tts/stream:
     post:
       tags:
@@ -92,8 +92,33 @@ paths:
               schema:
                 type: string
                 format: binary
+      operationId: postApiV1TtsStream
+      x-operation-id-source: derived
 components:
   schemas:
+    TTSStreamRequest:
+      allOf:
+      - $ref: '#/components/schemas/TTSRequest'
+    TTSJob:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - processing
+          - complete
+          - failed
+        outputUrl:
+          type: string
+          format: uri
+        durationSeconds:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
     TTSRequest:
       type: object
       required:
@@ -120,29 +145,6 @@ components:
           - mulaw
         speed:
           type: number
-    TTSJob:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-          enum:
-          - queued
-          - processing
-          - complete
-          - failed
-        outputUrl:
-          type: string
-          format: uri
-        durationSeconds:
-          type: number
-        createdAt:
-          type: string
-          format: date-time
-    TTSStreamRequest:
-      allOf:
-      - $ref: '#/components/schemas/TTSRequest'
   parameters:
     AsyncTtsJobId:
       name: asyncTtsJobId
