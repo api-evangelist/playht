@@ -68,6 +68,19 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PlayNote:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        audioUrl:
+          type: string
+          format: uri
+        createdAt:
+          type: string
+          format: date-time
     PlayNoteRequest:
       type: object
       required:
@@ -82,19 +95,6 @@ components:
           type: string
         voice2:
           type: string
-    PlayNote:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        audioUrl:
-          type: string
-          format: uri
-        createdAt:
-          type: string
-          format: date-time
   parameters:
     PlayNoteId:
       name: playNoteId

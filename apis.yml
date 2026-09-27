@@ -54,6 +54,7 @@ tags:
   - PlayNote
   - Multilingual
   - Real-Time
+  - Defunct
 tags_raw:
   - Voice
   - TTS
@@ -66,6 +67,7 @@ tags_raw:
   - PlayNote
   - Multilingual
   - Real-Time
+  - Defunct
 url: https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-29'
@@ -294,3 +296,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-status: defunct
+x-status-detail: 'Meta acqui-hired the PlayAI (PlayHT) team in July 2025; the API went offline in late July 2025 and the product sunset on 2025-12-31. play.ht, api.play.ht and play.ai do not resolve (checked 2026-09-24). Sources: inworld.ai/resources/migrate-from-playht, aiwiki.ai/wiki/playht. roadmap#780'
