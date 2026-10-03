@@ -95,7 +95,17 @@ paths:
       operationId: postApiV1TtsStream
       x-operation-id-source: derived
 components:
+  parameters:
+    AsyncTtsJobId:
+      name: asyncTtsJobId
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    TTSStreamRequest:
+      allOf:
+      - $ref: '#/components/schemas/TTSRequest'
     TTSJob:
       type: object
       properties:
@@ -116,9 +126,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    TTSStreamRequest:
-      allOf:
-      - $ref: '#/components/schemas/TTSRequest'
     TTSRequest:
       type: object
       required:
@@ -145,13 +152,6 @@ components:
           - mulaw
         speed:
           type: number
-  parameters:
-    AsyncTtsJobId:
-      name: asyncTtsJobId
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey
