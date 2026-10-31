@@ -1,4 +1,4 @@
-# PlayHT (playht)
+# PlayHT
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,106 +64,117 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
+> **No longer operating.** This company or product has shut down, been discontinued, or been deprecated. This profile is kept as a historical record and is not maintained or rated.
+
 PlayHT, now operating as PlayAI, is a generative voice platform offering realistic text-to-speech models, AI voice agents, and a podcast generation tool called PlayNote. The platform centers on the PlayDialog and Play 3.0 Mini models, providing more than 200 prebuilt voices across multiple languages and accents with sub-second latency suited to conversational applications. PlayAI exposes REST and streaming endpoints for text-to-speech, voice listing, voice cloning, and voice agent management. It ships Python and Node.js SDKs and a hosted playground, and integrates with the major voice agent infrastructure stacks. The product is widely used to build voice assistants, IVRs, narration pipelines, and content production workflows.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/apis.yml)
+**Areas:** Voice · TTS · Text-to-Speech · Voice Cloning · Voice Agents · Streaming · PlayDialog · Play 3.0 · PlayNote · Multilingual · Real-Time · Defunct
 
-## Scope
+## PlayHT on APIs.io (historical record)
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for PlayHT is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/playht/](https://apis.io/providers/playht/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-- Voice
-- TTS
-- Text to Speech
-- Voice Cloning
-- Voice Agents
-- Streaming
-- PlayDialog
-- Play 3.0
-- PlayNote
-- Multilingual
-- Real-Time
+- [PlayAI Text-to-Speech API](https://apis.io/apis/playht/tts-api/) — The PlayAI Text-to-Speech API converts text into natural, human-like speech using the PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini models. It…
+- [PlayAI Voice Agents API](https://apis.io/apis/playht/agents-api/) — The PlayAI Voice Agents API lets developers create, configure, and run conversational AI agents that process voice input and respond with generated speech,…
+- [PlayHT Agents API](https://apis.io/apis/playht/playht-agents-api/) — Voice agent management.
+- [PlayHT Conversations API](https://apis.io/apis/playht/playht-conversations-api/) — Agent conversation retrieval.
+- [PlayHT External Functions API](https://apis.io/apis/playht/playht-external-functions-api/) — Tool definitions for voice agents.
+- [PlayHT PlayNote API](https://apis.io/apis/playht/playht-playnote-api/) — Document-to-audio PlayNote jobs.
+- [PlayHT TTS API](https://apis.io/apis/playht/playht-tts-api/) — Text-to-speech generation, streaming, and async jobs.
+- [PlayHT Voices API](https://apis.io/apis/playht/playht-voices-api/) — Prebuilt voice catalog.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-23
-- **Modified:** 2026-05-29
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### PlayAI Text-to-Speech API
+Event-driven and webhook contracts.
 
-The PlayAI Text-to-Speech API converts text into natural, human-like speech using the PlayDialog 1.0, Dialog 1.0 Turbo, and Play 3.0 Mini models. It supports streaming, voice cloning, and a large catalog of prebuilt voices across many languages and accents.
+- [PlayAI Realtime WebSocket APIs](https://apis.io/asyncapis/playht/playht-asyncapi/)
 
-- **Human URL:** [https://docs.play.ai](https://docs.play.ai)
-- **Base URL:** `https://api.play.ai`
+#### Event channels (2)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- TTS
-- Streaming
-- Voice Cloning
-- Voices
-- Multilingual
+- [/playht-tts/stream](https://apis.io/channels/playht/playht-tts-stream/)
+- [/v1/talk/{agentId}](https://apis.io/channels/playht/v1-talk-agentid/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://docs.play.ai)
-- [Getting Started](https://docs.play.ai/tts-api)
-- [Sign Up](https://play.ai/signup)
-- [API Reference](https://docs.play.ai)
-- [SDK](https://github.com/playht/pyht)
-- [SDK](https://github.com/playht/playht-nodejs-sdk)
-- [GitHub Repository](https://github.com/playht)
-- [Pricing](https://play.ai/pricing)
-- [Authentication](https://docs.play.ai)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/playht.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/playht.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### PlayAI Voice Agents API
+- [Playht Agentic Access](https://apis.io/agentic-access/playht/playht-agentic-access/)
 
-The PlayAI Voice Agents API lets developers create, configure, and run conversational AI agents that process voice input and respond with generated speech, with optional tool use and external integrations.
+#### Collections (7)
 
-- **Human URL:** [https://docs.play.ai](https://docs.play.ai)
-- **Base URL:** `https://api.play.ai`
+Postman and Open Collection request collections.
 
-#### Tags
+- [PlayAI API](https://apis.io/collections/playht/open-playht/)
+- [PlayAI Agents API](https://apis.io/collections/playht/open-playht-agents-api/)
+- [PlayAI Agents Conversations API](https://apis.io/collections/playht/open-playht-conversations-api/)
+- [PlayAI Agents External Functions API](https://apis.io/collections/playht/open-playht-external-functions-api/)
+- [PlayAI Agents PlayNote API](https://apis.io/collections/playht/open-playht-playnote-api/)
+- [PlayAI Agents TTS API](https://apis.io/collections/playht/open-playht-tts-api/)
+- [PlayAI Agents Voices API](https://apis.io/collections/playht/open-playht-voices-api/)
 
-- Voice Agents
-- Conversational AI
-- Tools
-- Streaming
+#### Governance rules (1)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://docs.play.ai)
-- [API Reference](https://docs.play.ai)
-- [SDK](https://github.com/playht)
-- [Pricing](https://play.ai/pricing)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/playht/refs/heads/main/asyncapi/playht-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/playht.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/playht.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [PlayHT — asyncapi rules](https://apis.io/rules/playht/playht-asyncapi-spectral-rules/)
 
-## Common Properties
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Playht Authentication](https://apis.io/security/playht/playht-authentication/)
+- [Playht Domain Security](https://apis.io/security/playht/playht-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Playht Plans Pricing](https://apis.io/plans/playht/playht-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Playht Rate Limits](https://apis.io/rate-limits/playht/playht-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Playht Finops](https://apis.io/finops/playht/playht-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://play.ht)
 - [Documentation](https://docs.play.ai)
-- [Blog](https://play.ht/blog)
-- [GitHub Organization](https://github.com/playht)
 - [Pricing](https://play.ht/pricing)
-- [Terms of Service](https://play.ht/terms)
-- [Privacy Policy](https://play.ht/privacy)
-- [Discord](https://discord.gg/VuP4nXVA9M)
-- [X (Twitter)](https://x.com/play_ht)
-- [LinkedIn](https://www.linkedin.com/company/playht)
-- [L L Ms Txt](https://docs.play.ai/llms.txt)
+- [Blog](https://play.ht/blog)
+- [Terms of service](https://play.ht/terms)
+- [Privacy policy](https://play.ht/privacy)
+- [GitHub](https://github.com/playht)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Not rated** — this company is recorded as no longer operating, so no score is published. If it is in fact operating, say so on this repository and it will be re-profiled.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PlayHT: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/playht/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
